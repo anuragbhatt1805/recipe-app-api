@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin # noqa
 from django.utils.translation import gettext_lazy as _ # noqa
 from . import models
 
+
 # Register your models here.
 class UserAdmin(BaseUserAdmin):
     """Django admin for custom user model"""
@@ -42,5 +43,6 @@ class UserAdmin(BaseUserAdmin):
                        ),
         }),
     )
+
 
 admin.site.register(models.User, UserAdmin)
