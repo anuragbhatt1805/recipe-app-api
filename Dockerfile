@@ -1,7 +1,7 @@
 ###############################################################################
 # Docker file for recipe app API
 # Author: Anurag Bhatt
-# Date: 2021-03-21
+# Date: 2023-06-10
 # Version: 1.0
 # Description: Docker file to build the image for the Django application
 # Usage: docker build .
