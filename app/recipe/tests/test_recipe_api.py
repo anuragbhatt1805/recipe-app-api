@@ -182,7 +182,7 @@ class PrivateRecipeApiTests(TestCase):
         res = self.client.patch(url, payload, format='json')
         recipe.refresh_from_db()
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        new_tag = Tag.objects.filter(user=self.user, name='Vegan')
+        new_tag = Tag.objects.get(user=self.user, name='Vegan')
         self.assertIn(new_tag, recipe.tags.all())
 
     def test_update_recipe_assign_tag(self):
