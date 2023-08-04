@@ -16,6 +16,7 @@ def detail_url(ingredient_id):
     """Return the detail URL for a given ingredient"""
     return reverse('recipe:ingredient-detail', args=[ingredient_id])
 
+
 def create_user(email="samples@example.com",
                 username="sample",
                 password="password"):
