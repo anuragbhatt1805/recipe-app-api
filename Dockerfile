@@ -40,9 +40,9 @@ ARG DEV=false
 # Lines are divided using && to reduce the number of layers in the image, This is done to reduce the size of the image
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
-    apk add --update --no-cache postgresql-client && \
+    apk add --update --no-cache postgresql-client jpeg-dev && \
     apk add --update --no-cache --virtual .tmp-build-deps \
-        build-base postgresql-dev musl-dev && \
+        build-base postgresql-dev musl-dev zlib zlib-dev && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt; \
@@ -52,7 +52,11 @@ RUN python -m venv /py && \
     adduser \
         --disabled-password \
         --no-create-home \
-        anurag
+        anurag && \
+    mkdir -p /vol/web/media && \
+    mkdir -p /vol/web/static && \
+    chown -R anurag:anurag /vol && \
+    chmod -R 755 /vol
 # The above command creates a virtual environment in the image and installs the dependencies in the virtual environment
 # The virtual environment is created in the /py folder
 # The --upgrade flag is used to upgrade the pip to the latest version
