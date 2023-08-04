@@ -55,7 +55,6 @@ class BaseRecipeAttrViewSet(mixins.UpdateModelMixin,
         serializer.save(user=self.request.user)
 
 
-
 class TagViewSet(BaseRecipeAttrViewSet):
     """Manage tags in the database"""
     queryset = Tag.objects.all()
