@@ -2,7 +2,8 @@
 Test for recipe APIs.
 """
 from decimal import Decimal
-import tempfile, os
+import tempfile
+import os
 from PIL import Image
 from django.contrib.auth import get_user_model
 from django.test import TestCase
@@ -390,4 +391,3 @@ class ImageUploadTestCase(TestCase):
         res = self.client.post(url, payload, format='multipart')
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
-        
