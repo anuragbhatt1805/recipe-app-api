@@ -2,9 +2,9 @@
 Test for recipe APIs.
 """
 from decimal import Decimal
-# import tempfile
-# import os
-# from PIL import Image
+import tempfile
+import os
+from PIL import Image
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -415,23 +415,23 @@ class ImageUploadTestCase(TestCase):
     def tearDown(self):
         self.recipe.image.delete()
 
-    # def test_upload_image(self):
-    #     """Test for Uploading the file"""
-    #     url = image_upload_url(self.recipe.id)
-    #     with tempfile.NamedTemporaryFile(suffix='.jpg') as img_file:
-    #         image = Image.new('RGB', (10, 10))
-    #         image.save(img_file, format='JPEG')
-    #         img_file.seek(0)
+    def test_upload_image(self):
+        """Test for Uploading the file"""
+        url = image_upload_url(self.recipe.id)
+        with tempfile.NamedTemporaryFile(suffix='.jpg') as img_file:
+            image = Image.new('RGB', (10, 10))
+            image.save(img_file, format='JPEG')
+            img_file.seek(0)
 
-    #         res = self.client.post(
-    #             url,
-    #             {'image': img_file},
-    #             format='multipart',
-    #         )
-    #     self.recipe.refresh_from_db()
-    #     self.assertEqual(res.status_code, status.HTTP_200_OK)
-    #     self.assertIn('image', res.data)
-    #     self.assertTrue(os.path.exists(self.recipe.image.path))
+            res = self.client.post(
+                url,
+                {'image': img_file},
+                format='multipart',
+            )
+        self.recipe.refresh_from_db()
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertIn('image', res.data)
+        self.assertTrue(os.path.exists(self.recipe.image.path))
 
     def test_upload_bad_request(self):
         """Test Uploading invalid image"""
